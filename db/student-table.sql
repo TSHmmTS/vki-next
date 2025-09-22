@@ -6,3 +6,5 @@ CREATE TABLE student(
     middle_name TEXT,
     groupId INTEGER
 );
+
+SELECT * FROM student
