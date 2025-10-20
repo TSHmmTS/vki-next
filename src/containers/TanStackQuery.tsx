@@ -26,6 +26,6 @@ const TanStackQuery = ({ state, children }: Props): React.ReactElement => {
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
   );
-}
+};
 
 export default TanStackQuery;
