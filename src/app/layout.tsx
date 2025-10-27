@@ -29,7 +29,7 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
   // выполняется на сервере - загрузка студентов
   await queryClient.prefetchQuery({
     queryKey: ['students'],
-    queryFn: getGroupsApi,
+    queryFn: getStudentsApi,
   });
 
   const state = dehydrate(queryClient, { shouldDehydrateQuery: () => true });

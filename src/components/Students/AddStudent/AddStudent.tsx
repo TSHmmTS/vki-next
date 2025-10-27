@@ -22,6 +22,8 @@ const AddStudent = ({ onAdd }: Props): React.ReactElement => {
             <h2>Добавление студента</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input placeholder="Фамилия" {...register('lastName', { required: true })}/>
+                <input placeholder="Имя" {...register('firstName', { required: true })}/>
+                <input placeholder="Отчество" {...register('middleName', { required: true })}/>
                 {errors.middleName && <div>Обязательное поле</div>}
 
                 <input type="submit" value="Добавить"/>

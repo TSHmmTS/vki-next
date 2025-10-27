@@ -6,6 +6,7 @@ import styles from './Students.module.scss';
 import Student from './Student/Student';
 import AddStudent, { type FormFields } from './AddStudent/AddStudent';
 import { v4 as uuidv4 } from 'uuid';
+import { AutoEncrypter } from 'typeorm';
 
 const Students = (): React.ReactElement => {
   const {
@@ -16,11 +17,15 @@ const Students = (): React.ReactElement => {
 
   const onDeleteHandler = (studentId: number): void => {
     if (confirm('Удалить студента?')) {
+      debugger;
+      console.log('onDeleteHandler', studentId);
+
       deleteStudentMutate(studentId);
     }
   };
 
   const onAddHandler = (studentFormField: FormFields): void => {
+    debugger;
     console.log('Добавление студента', studentFormField);
 
     addStudentMutate({

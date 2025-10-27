@@ -45,6 +45,8 @@ const useStudents = (): StudentsHookInterface => {
       // обновляем данные в TanStackQuery
       queryClient.setQueryData<StudentInterface[]>(['students'], updatedStudents);
 
+      console.log('deleteStudent')
+
       return { previousStudents, updatedStudents };
     },
     onError: (err, variables, context) => {
