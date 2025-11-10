@@ -11,6 +11,15 @@ const AppDataSource = new DataSource({
   logging: false,
 });
 
+ const init = async (): Promise<void> => {
+   try {
+     await AppDataSource.initialize();
+   }
+   catch (error) {
+     console.log(error);
+   }
+ };
+
 AppDataSource.initialize()
   .then(async () => {
     console.log('Data Source has been initialized!');
