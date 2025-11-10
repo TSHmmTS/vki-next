@@ -12,8 +12,22 @@ const AppDataSource = new DataSource({
 });
 
 AppDataSource.initialize()
-  .then(() => {
+  .then(async () => {
     console.log('Data Source has been initialized!');
+
+    const groupRepository = AppDataSource.getRepository(Group);
+    const defaultGroups = [
+      { name: '2207А1', contacts: 'Контакты не указаны' },
+      { name: '2207А2', contacts: 'Контакты не указаны' },
+    ];
+
+    for (const group of defaultGroups) {
+      const exists = await groupRepository.findOne({ where: { name: group.name } });
+
+      if (!exists) {
+        await groupRepository.save(group);
+      }
+    }
   })
   .catch((err) => {
     console.error('Error during Data Source initialization:', err);

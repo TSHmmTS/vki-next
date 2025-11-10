@@ -1,6 +1,7 @@
 'use client';
 
 import useStudents from '@/hooks/useStudents';
+import useGroups from '@/hooks/useGroups';
 import type StudentInterface from '@/types/StudentInterface';
 import styles from './Students.module.scss';
 import Student from './Student/Student';
@@ -14,6 +15,7 @@ const Students = (): React.ReactElement => {
     deleteStudentMutate,
     addStudentMutate,
   } = useStudents();
+  const { groups } = useGroups();
 
   const onDeleteHandler = (studentId: number): void => {
     if (confirm('Удалить студента?')) {
@@ -25,13 +27,16 @@ const Students = (): React.ReactElement => {
   };
 
   const onAddHandler = (studentFormField: FormFields): void => {
+    const fallbackGroupId = groups[0]?.id ?? 1;
+    const studentGroupId = Number.isFinite(studentFormField.groupId) ? studentFormField.groupId : fallbackGroupId;
+
     debugger;
     console.log('Добавление студента', studentFormField);
 
     addStudentMutate({
       id: -1,
       ...studentFormField,
-      groupId: 1,
+      groupId: studentGroupId,
       uuid: uuidv4(),
     });
   };
