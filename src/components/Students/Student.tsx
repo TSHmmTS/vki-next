@@ -24,7 +24,7 @@ const Student = ({ studentId }: Props): React.ReactElement => {
       <BackLink href="/students">{'<< список студентов'}</BackLink>
       <h2>{`${student.lastName} ${student.firstName} ${student.middleName}`}</h2>
       <div>{`ID: ${student.id}`}</div>
-      <div>{`Группа: ${student.groupId}`}</div>
+      <div>{`Из группы ${student.group?.name}`}</div>
     </div>
   );
 };
