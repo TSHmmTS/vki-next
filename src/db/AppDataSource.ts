@@ -8,7 +8,7 @@ import { hashPassword } from '@/utils/password';
 const AppDataSource = new DataSource({
   type: 'sqlite',
   database: process.env.DB ?? './db/vki-web.db',
-  entities: [Group, Student],
+  entities: [Group, Student, User],
   synchronize: true,
   logging: false,
 });
@@ -34,6 +34,11 @@ const ensureSeedUsers = async (): Promise<void> => {
       email: 'admin@example.com',
       fullName: 'Администратор Системы',
       password: hashPassword('admin123'),
+    },
+    {
+      email: 'manager@example.com',
+      fullName: 'Менеджер Учебного Отдела',
+      password: hashPassword('manager123'),
     },
   ];
 

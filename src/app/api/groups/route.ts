@@ -2,7 +2,7 @@ import { dbInit } from '@/db/AppDataSource';
 import { getGroupsDb } from '@/db/groupDb';
 
 export async function GET(): Promise<Response> {
-  await dbInit();
+  //await dbInit();
 
   const groups = await getGroupsDb();
 
