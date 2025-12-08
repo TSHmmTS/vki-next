@@ -1,20 +1,19 @@
 import type StudentInterface from '@/types/StudentInterface';
 
 export const getStudentsApi = async (): Promise<StudentInterface[]> => {
-  // try {
+  try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API}students`);
 
     if (!response.ok) {
       throw new Error(`Ошибка HTTP: ${response.status}${response.statusText}`);
     }
     const students = await response.json() as StudentInterface[];
-    console.log('st', students);
     return students;
-  // }
-  // catch (err) {
-  //   console.log('>>> getGroupsApi', err);
-  //   return [] as StudentInterface[];
-  // }
+  }
+  catch (err) {
+    console.log('>>> getGroupsApi', err);
+    return [] as StudentInterface[];
+  }
 };
 
 export const deleteStudentApi = async (studentId: number): Promise<number> => {
@@ -30,6 +29,7 @@ export const deleteStudentApi = async (studentId: number): Promise<number> => {
     }
     console.log('deleteStudentApi ok', studentId);
     debugger;
+
     return studentId;
   }
   catch (err) {
@@ -40,18 +40,38 @@ export const deleteStudentApi = async (studentId: number): Promise<number> => {
 
 export const addStudentApi = async (student: StudentInterface): Promise<StudentInterface> => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API}students`,  {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}students`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(student),
     });
+
     if (!response.ok) {
       throw new Error(`Ошибка HTTP: ${response.status}`);
     }
+
     return response.json() as Promise<StudentInterface>;
   }
   catch (err) {
     console.log('>>> addStudentApi', err);
     throw err;
+  }
+};
+
+export const getStudentByIdApi = async (id: string): Promise<StudentInterface | null> => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}students/${id}`, {
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return await response.json();
+  }
+  catch (error) {
+    console.error('Error fetching student:', error);
+    return null;
   }
 };
